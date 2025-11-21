@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkyMc 공식 사이트</title>
+    <style>
+       
+        :root {
+            --main-bg: #1e1e1e;
+            --text-color: #f0f0f0;
+            --accent-color: #3498db;
+            --discord-color: #5865F2;
+        }
+
+        body {
+            font-family: 'Malgun Gothic', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            background-color: var(--main-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+       
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            z-index: 1000;
+        }
+
+        .menu-toggle {
+            cursor: pointer;
+            position: relative;
+            z-index: 1001; 
+            width: 30px;
+            height: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+        }
+
+        .bar {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text-color);
+            transition: all 0.3s ease-in-out;
+            
+        }
+
+        
+        .menu-toggle.open .bar:nth-child(1) {
+            
+            transform: translateY(9px) rotate(45deg);
+        }
+        .menu-toggle.open .bar:nth-child(2) {
+            opacity: 0; 
+        }
+        .menu-toggle.open .bar:nth-child(3) {
+            transform: translateY(-9px) rotate(-45deg);
+        }
+
+        
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px; 
+            width: 250px;
+            height: 100%;
+            background-color: #2c3e50;
+            padding-top: 80px;
+            transition: left 0.3s ease-in-out;
+            z-index: 999;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar.open {
+            left: 0;
+        }
+
+        .sidebar a, .sidebar button {
+            padding: 15px 25px;
+            text-decoration: none;
+            color: var(--text-color);
+            font-size: 1.2em;
+            display: block;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .sidebar button:hover, .sidebar a:hover {
+            background-color: #34495e;
+        }
+
+        .discord-link {
+            font-weight: bold;
+            color: var(--discord-color) !important;
+            border-bottom: 1px solid #34495e;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .discord-link span {
+            font-size: 1.5em; 
+            margin-right: 10px;
+            line-height: 1;
+        }
+
+       
+        main {
+            padding: 20px;
+            padding-top: 70px; 
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+            min-height: 80vh; 
+        }
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-up-text {
+            font-size: 3em;
+            text-align: center;
+            margin-bottom: 50px;
+            font-weight: 900;
+            opacity: 0; 
+            animation: fadeInUp 1.2s cubic-bezier(0.19, 1, 0.22, 1) 0.5s forwards; 
+            text-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+        }
+
+        .server-info h2 {
+            color: var(--accent-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 5px;
+            margin-top: 40px;
+            font-size: 1.8em; 
+        }
+
+        .server-info p, .server-info li {
+            font-size: 1.3em; 
+            margin: 15px 0;
+        }
+
+        .server-info h3 {
+            font-size: 1.5em; 
+            margin-top: 30px;
+        }
+
+        .color-a { color: #FFD700; } 
+        .color-b { color: #FFA07A; }
+        .color-c { color: #98FB98; }
+        .color-d { color: #ADD8E6; }
+        .color-e { color: #FF69B4; font-weight: bold;} 
+        .server-info li { color: #B0C4DE; }
+
+        
+        #rules h2 {
+            color: #E74C3C; 
+            border-bottom: 3px solid #E74C3C;
+            padding-bottom: 10px;
+        }
+        #rules h3 {
+            color: #F1C40F; 
+            margin-top: 30px;
+            font-size: 1.4em;
+            border-left: 5px solid #F1C40F;
+            padding-left: 10px;
+        }
+        #rules ul {
+            list-style: disc;
+            margin-left: 20px;
+            padding-left: 0;
+        }
+        #rules li {
+            margin-bottom: 8px;
+            font-size: 1.1em; 
+        }
+        #rules ul ul {
+             list-style: circle;
+             margin-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="menu-toggle" id="menuToggle">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+        <nav class="sidebar" id="sidebarMenu">
+            <a href="https://discord.gg/mpmewT8aaX" target="_blank" class="discord-link">
+                <span>🚀</span> Discord 입장
+            </a>
+            <button onclick="showSection('info')">정보 (Info)</button>
+            <button onclick="showSection('rules')">법전 (Rules)</button>
+        </nav>
+    </header>
+
+    <main>
+        <section id="info" class="section active">
+            <h1 class="fade-up-text">SkyMc Returns 공식 사이트입니다 !</h1>
+            
+            <div class="server-info">
+                <h2>Server Info</h2>
+                
+                <p>서버 이름: <span class="color-a">SkyMc</span> </p>
+                <p>서버 장르: <span class="color-c">CPvP</span> <span class="color-d">야생약탈</span></p>
+                <p>서버 버전: 1.20.1 - 1.21</p>
+                <p>서버주소 : <span class="color-e">SkyMc.kr</span> (예정)</p>
+
+                <h3>서버 월드보더</h3>
+                <ul>
+                    <li>Overworld - 30000 x 30000</li>
+                    <li>Nether World - 3750 x 3750</li>
+                    <li>Ender World - 20000 x 20000</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="rules" class="section">
+            <h2>📜 SkyMc Returns l [중요 규칙]</h2>
+            
+            <div class="rule-group">
+                <h3>1. ⚠️ 처벌 규정⚠️</h3>
+                <ul>
+                    <li>모든 처벌은 관리자 판단 및 재량에 따라 결정됩니다.</li>
+                </ul>
+
+                <h3>2. 🚫 서버 피해 금지</h3>
+                <ul>
+                    <li>핵 또는 서버에 피해를 주는 모든 행위 금지됩니다.</li>
+                </ul>
+
+                <h3>3. ✅ 모드 규정</h3>
+                <ul>
+                    <li>엔티티 미니맵 금지</li>
+                    <li>프리캠 금지</li>
+                    <li>비인가 프로그램 (오토마우스, 매크로, 핵 등) 금지</li>
+                </ul>
+
+                <h3>4. ⚙️ TPS 저하 금지</h3>
+                <ul>
+                    <li>레드스톤 테러와 같은 TPS를 저하시키는 행위 금지됩니다.</li>
+                </ul>
+
+                <h3>5. 🚨 보호구역 머리막기 금지</h3>
+                <ul>
+                    <li>보호구역에서 머리막기 시 영구 밴.</li>
+                </ul>
+
+                <h3>6. 🎙️ 음성 채팅 규정</h3>
+                <ul>
+                    <li>통화방에서 욕설, 분쟁 유도, 비하 발언, 패드립 등의 규칙 위반 시 수위에 따라 처벌됩니다.</li>
+                </ul>
+
+                <h3>7. 💬 귓속말 규칙</h3>
+                <ul>
+                    <li>귓속말로 규칙을 위반하는 행위도 처벌 대상입니다.</li>
+                    <li>뮤트 상태에서도 귓속말로 욕설 등의 규칙 위반 시 밴 대상입니다.</li>
+                </ul>
+            </div>
+            
+            <h2>📋 채팅 규칙</h2>
+            <p>⚠️ 모두가 즐겁고 편안하게 소통할 수 있도록 아래 규칙을 반드시 지켜주세요.</p>
+            <ul>
+                <li>1. 도배 금지: 같은 채팅 또는 비슷한 채팅을 빠른 시간 내에 4번 이상 반복 시 처벌됩니다. (뮤트: 1시간)</li>
+                <li>2. 욕설 금지: 'ㅅㅂ', 'ㅂㅅ' 등 욕설을 표현하거나 추상화하려는 의도가 있는 경우 처벌됩니다. (뮤트: 1시간)</li>
+                <li>3. 성드립/성희롱 금지: 성적인 발언 및 이를 표현하거나 추상화하려는 의도가 있는 경우 처벌됩니다. (뮤트: 3시간)</li>
+                <li>4. 패드립 금지: 패드립을 표현하거나 추상화하려는 의도가 있는 경우 처벌됩니다. (뮤트: 3시간)</li>
+                <li>5. 분쟁유도/분쟁 금지: 싸움을 유도하거나 분쟁을 하는 경우 처벌됩니다. (뮤트: 2시간)
+                    <ul><li>단, ez 발언은 허용됩니다.</li></ul>
+                </li>
+                <li>6. 개인 정보 유출 금지: 닉네임을 제외한 개인 정보를 유출할 경우 수위에 따라 처벌됩니다. (뮤트 ~ 영구밴)</li>
+                <li>7. 서버 테러 / 비하 / 타 서버 관련 발언 금지: 서버에 해를 끼치거나 다른 서버를 언급하는 발언은 처벌됩니다. (뮤트: 1시간)</li>
+                <li>8. 인신공격 금지: 타인을 비난하거나 인격을 모독하는 행위는 금지됩니다. (뮤트: 1시간)</li>
+                <li>9. 비하 금지: 상대방을 깍아내리거나 기분 나쁘게 하는 발언도 금지됩니다. (뮤트: 1시간)
+                    <ul><li>예: '킬카 미만 잡', '킬카 너무 잘생김' 등</li></ul>
+                </li>
+                <li>10. 정치관련 금지: 정치 관련 발언(일베 포함)을 하거나 특정 정당을 지지하는 행위는 금지됩니다. (뮤트: 3시간)
+                    <ul><li>예: '기호 17번 언돔을 뽑아라 !', '언돔당은 솔직히 너무 에바임' 등</li></ul>
+                </li>
+            </ul>
+
+            <h2>📋 활동 규칙</h2>
+            <ul>
+                <li>1. 💰 현금 거래 금지: 서버 내에서 현금 거래를 시도하는 행위는 금지됩니다. (영구밴)</li>
+                <li>2. 🎉 이벤트 요구 금지: 관리자를 대상으로 이벤트를 요구하는 행위는 금지됩니다. (뮤트: 1시간)</li>
+                <li>3. 🚫 보호구역 및 스폰 규정: 보호구역에 블록을 설치하거나 보호구역을 둘러싸는 행위는 금지됩니다. (영구밴)
+                    <ul><li>스폰 지역에 블록을 설치하는 행위 또한 금지됩니다. (영구밴)</li></ul>
+                </li>
+                <li>4. 🔨 버그 악용 금지: 버그를 악용하거나 신고하지 않는 경우 처벌됩니다. (영구밴)</li>
+                <li>5. 🚫 보구엔크 금지: 보구엔크 사용 금지. (영구밴)</li>
+                <li>6. 🗺️ 서버 내 맵 탈출 금지: 서버 내에서 맵 탈출은 허용되지 않습니다. (영구밴)</li>
+            </ul>
+
+            <h2>📋 팜 규칙</h2>
+            <ul>
+                <li>1. 🎃 호박팜/수박팜 규정: 가로, 세로 30칸 이내, 최대 1층으로 제한됩니다. (수동팜 포함)
+                    <ul><li>크기와 관계없이 인당 1개만 허용됩니다.</li></ul>
+                </li>
+                <li>2. 🎋 대나무팜/사탕수수팜 규정: 가로, 세로 35칸 이내, 최대 5층으로 제한됩니다. (수동팜 포함)
+                    <ul><li>크기와 관계없이 인당 1개만 허용됩니다.</li></ul>
+                </li>
+                <li>3. 🚫 금지된 팜 형식: 아래 영상과 같은 팜은 사용 금지입니다.</li>
+            </ul>
+
+ <div class="video-container">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/Jni23fbz0GI" 
+                        title="YouTube video player 1" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/AW1R0w1XRlw" 
+                        title="YouTube video player 2" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen
+                    ></iframe>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+       
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            this.classList.toggle('open');
+            document.getElementById('sidebarMenu').classList.toggle('open');
+        });
+
+        
+        function showSection(sectionId) {
+            
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.getElementById('menuToggle').classList.remove('open');
+            document.getElementById('sidebarMenu').classList.remove('open');
+
+            
+            if (sectionId === 'info') {
+                const h1 = document.querySelector('#info .fade-up-text');
+                
+                h1.style.animation = 'none';
+                h1.offsetHeight;
+                h1.style.animation = ''; 
+            }
+        }
+
+       
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('info');
+        });
+    </script>
+</body>
+</html>
