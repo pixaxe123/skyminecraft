@@ -1,2 +1,0 @@
-# skyminecraft
-mc
