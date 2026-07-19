@@ -82,40 +82,6 @@
             color: white;
         }
 
-        .subsection-nav {
-            display: none;
-            background-color: #f9fcff;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-        }
-
-        .subsection-nav.active {
-            display: flex;
-        }
-
-        .subsection-btn {
-            background-color: #e8f4f8;
-            border: 1px solid var(--primary-color);
-            color: var(--primary-color);
-            padding: 8px 16px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .subsection-btn:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
      
         main {
             margin-top: 100px;
@@ -231,21 +197,48 @@
         .dev-role { color: var(--primary-color); font-weight: bold; margin-bottom: 5px; display: block; }
         .dev-name { font-size: 1.3rem; font-weight: bold; }
 
-        
+        .rule-nav {
+            display: none;
+            background-color: #f9fcff;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+        }
+
+        .rule-nav.active {
+            display: flex;
+        }
+
+        .rule-nav-btn {
+            background: linear-gradient(135deg, #e8f4f8 0%, #f0f8ff 100%);
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .rule-nav-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(74, 168, 216, 0.3);
+        }
+
         .rule-box h3 {
             background-color: #f0f8ff;
             padding: 10px 15px;
             border-radius: 10px;
             color: var(--primary-dark);
             margin-top: 30px;
-        }
-
-        .subsection {
-            display: none;
-        }
-
-        .subsection.active {
-            display: block;
         }
 
         .rule-list {
@@ -295,8 +288,8 @@
             .nav-container { gap: 10px; }
             .nav-btn { padding: 8px 15px; font-size: 0.9rem; }
             main { padding: 15px; }
-            .subsection-nav { gap: 5px; }
-            .subsection-btn { padding: 6px 12px; font-size: 0.8rem; }
+            .rule-nav { gap: 8px; padding: 15px; }
+            .rule-nav-btn { padding: 10px 15px; font-size: 0.85rem; }
         }
     </style>
 </head>
@@ -353,18 +346,18 @@
         </section>
 
         <section id="rules" class="content-section">
-            <div class="subsection-nav active" id="rulesNav">
-                <button class="subsection-btn" onclick="switchSubsection('rules', 'notice')">중요 안내</button>
-                <button class="subsection-btn" onclick="switchSubsection('rules', 'basic')">기본 금지</button>
-                <button class="subsection-btn" onclick="switchSubsection('rules', 'chat')">채팅 규칙</button>
-                <button class="subsection-btn" onclick="switchSubsection('rules', 'activity')">활동/보호구역</button>
-                <button class="subsection-btn" onclick="switchSubsection('rules', 'farm')">팜 규칙</button>
+            <div class="rule-nav active" id="ruleNav">
+                <a href="#rule-notice" class="rule-nav-btn" onclick="scrollToRule('rule-notice')">📋 중요 안내</a>
+                <a href="#rule-basic" class="rule-nav-btn" onclick="scrollToRule('rule-basic')">🚫 기본 금지</a>
+                <a href="#rule-chat" class="rule-nav-btn" onclick="scrollToRule('rule-chat')">💬 채팅 규칙</a>
+                <a href="#rule-activity" class="rule-nav-btn" onclick="scrollToRule('rule-activity')">⛏️ 활동/보호구역</a>
+                <a href="#rule-farm" class="rule-nav-btn" onclick="scrollToRule('rule-farm')">🌾 팜 규칙</a>
             </div>
 
             <div class="card rule-box">
                 <h2>📜 SkyMc 법전</h2>
                 
-                <div id="notice" class="subsection active">
+                <div id="rule-notice">
                     <h3>중요 안내 사항</h3>
                     <ul class="rule-list">
                         <li>처벌 결정: 관리자가 위반 정도, 고의성, 피해 규모, 재범 여부 및 경고 횟수 등을 종합적으로 판단하여 처벌 수위를 결정합니다.</li>
@@ -376,7 +369,7 @@
                     </ul>
                 </div>
 
-                <div id="basic" class="subsection">
+                <div id="rule-basic" style="margin-top: 40px;">
                     <h3>기본 금지 사항</h3>
                     <p>※ 기본 금지 사항 위반 시 처벌 수위는 위반 정도에 따라 경고 또는 영구밴까지 적용될 수 있습니다.</p>
                     
@@ -404,7 +397,7 @@
                     </ul>
                 </div>
 
-                <div id="chat" class="subsection">
+                <div id="rule-chat" style="margin-top: 40px;">
                     <h3>채팅 규칙</h3>
                     <p>※ 채팅 규칙은 통화방에도 적용될 수 있습니다.</p>
                     <ul class="rule-list">
@@ -425,7 +418,7 @@
                     </ul>
                 </div>
 
-                <div id="activity" class="subsection">
+                <div id="rule-activity" style="margin-top: 40px;">
                     <h3>활동 및 보호구역 규칙</h3>
                     
                     <h3>현금 거래 금지</h3>
@@ -454,7 +447,7 @@
                     </ul>
                 </div>
 
-                <div id="farm" class="subsection">
+                <div id="rule-farm" style="margin-top: 40px;">
                     <h3>팜(농장) 규칙</h3>
                     <ul class="rule-list">
                         <li>호박/수박팜: 30x30칸 이내, 최대 1층, 인당 1개</li>
@@ -527,8 +520,8 @@ WILD</span>
                 btn.classList.remove('active');
             });
 
-            // 섹션 네비게이션 숨기기
-            document.querySelectorAll('.subsection-nav').forEach(nav => {
+            // 규칙 네비게이션 숨기기
+            document.querySelectorAll('.rule-nav').forEach(nav => {
                 nav.classList.remove('active');
             });
 
@@ -550,7 +543,7 @@ WILD</span>
 
                 // 규칙 섹션 네비게이션 표시
                 if(tabId === 'rules') {
-                    document.getElementById('rulesNav').classList.add('active');
+                    document.getElementById('ruleNav').classList.add('active');
                 }
             }
 
@@ -563,23 +556,11 @@ WILD</span>
             }
         }
 
-        function switchSubsection(section, subsectionId) {
-            // 모든 subsection 숨기기
-            document.querySelectorAll('.subsection').forEach(sub => {
-                sub.classList.remove('active');
-            });
-
-            // 선택한 subsection 표시
-            const targetSubsection = document.getElementById(subsectionId);
-            if(targetSubsection) {
-                targetSubsection.classList.add('active');
+        function scrollToRule(ruleId) {
+            const element = document.getElementById(ruleId);
+            if(element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
-
-            // 버튼 active 상태 업데이트
-            document.querySelectorAll('.subsection-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
         }
     </script>
 </body>
