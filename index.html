@@ -181,21 +181,54 @@
    
         .dev-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            text-align: center;
+            text-align: left;
         }
         .dev-card {
-            background: white;
-            padding: 30px 20px;
+            background: linear-gradient(135deg, #f9fcff 0%, #ffffff 100%);
+            padding: 25px;
             border-radius: 15px;
-            border: 1px solid #eee;
-            transition: transform 0.2s;
+            border: 2px solid #e1ecf4;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
-        .dev-card:hover { transform: translateY(-5px); box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .dev-icon { font-size: 3rem; margin-bottom: 15px; display: block; }
-        .dev-role { color: var(--primary-color); font-weight: bold; margin-bottom: 5px; display: block; }
-        .dev-name { font-size: 1.3rem; font-weight: bold; }
+        .dev-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 20px rgba(74, 168, 216, 0.15);
+            border-color: var(--primary-color);
+        }
+        .dev-name { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .dev-role { 
+            color: var(--text-sub); 
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            display: block;
+        }
+        .dev-desc {
+            color: var(--text-main);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .manager-section {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 2px solid #eef2f5;
+        }
+
+        .manager-title {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
         .rule-nav {
             display: none;
@@ -288,8 +321,9 @@
             .nav-container { gap: 10px; }
             .nav-btn { padding: 8px 15px; font-size: 0.9rem; }
             main { padding: 15px; }
-            .rule-nav { gap: 8px; padding: 15px; }
+            .rule-nav { gap: 5px; padding: 15px; }
             .rule-nav-btn { padding: 10px 15px; font-size: 0.85rem; }
+            .dev-container { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -484,25 +518,33 @@
                 <h2>🛠️ 개발 및 관리</h2>
                 <div class="dev-container">
                     <div class="dev-card">
-                        <span class="dev-icon">👑</span>
-                        <span class="dev-role">총관리자</span>
-                        <span class="dev-name">해파리</span>
+                        <span class="dev-name">@killkaisMe</span>
+                        <span class="dev-role">서버 총관리자</span>
+                        <span class="dev-desc">서버의 기본적인 기능을 제작 및 수정하고 있음</span>
                     </div>
                     <div class="dev-card">
-                        <span class="dev-icon">💻</span>
-                        <span class="dev-role">개발자</span>
-                        <span class="dev-name">언돔(인게임), 부바(외부)</span>
+                        <span class="dev-name">@언돔이라네요</span>
+                        <span class="dev-role">서버 관리자이자 개발자</span>
+                        <span class="dev-desc">매니저분들을 관리하고 있음</span>
                     </div>
                     <div class="dev-card">
-                        <span class="dev-icon">🛡️</span>
-                        <span class="dev-role">관리자</span>
-                        <span class="dev-name">
-BAMBAM, 
-CANDY, 
-HAYUN, 
-MANDOO, 
-MINTES, 
-WILD</span>
+                        <span class="dev-name">@.</span>
+                        <span class="dev-role">서버 관리자이자 개발자</span>
+                        <span class="dev-desc">주로 핵검을 하고 있음</span>
+                    </div>
+                    <div class="dev-card">
+                        <span class="dev-name">@나다</span>
+                        <span class="dev-role">대부분 인게임 외 관리자</span>
+                        <span class="dev-desc">웹사이트를 담당하고 있음</span>
+                    </div>
+                </div>
+
+                <div class="manager-section">
+                    <div class="manager-title">「MANAGER」․매니저</div>
+                    <div class="dev-container">
+                        <div class="dev-card">
+                            <span class="dev-desc">게임 내외 규칙 처벌을 담당하고, 관리자에게 서버의 문의를 직접하고 있음.</span>
+                        </div>
                     </div>
                 </div>
             </div>
